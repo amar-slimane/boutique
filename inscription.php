@@ -5,16 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>Inscription</title>
 </head>
 
+
 <body>
     <header>
-        <?php include 'include/header.php' ?>
+        <?php 
+        include 'include/header.php';
+        $pdo = new userpdo();
+        $pdo->register();
+        ?>
     </header>
     <?php
-    $pdo->register();
     ?>
     <main class="d-flex justify-content-around">
         <div class="formdiv">

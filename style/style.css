@@ -1,0 +1,21 @@
+body {
+    background-image:url('../media/wallpaper/mainwallpaper.jpg');
+    background-size: cover;
+}
+.adminbg {
+    background-image: url('../media/wallpaper/adminwallpaper.jpg');
+    background-size: cover;
+}
+
+ table {
+    background-color : white;
+    opacity: 0.9;
+    height: 100%;
+    height: auto;
+}
+.table_user {
+    margin : 0;
+ height : 50vh;
+ width : 60vw;
+ overflow-y: scroll;
+}

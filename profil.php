@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>Profil</title>
 </head>
 
@@ -16,7 +16,10 @@
 
         <form method="post">
             <?php
-            $pdo->update(); ?>
+               if (!isset($_SESSION['pdo'])){
+                $_SESSION['pdo'] = new userpdo;
+            }
+            $_SESSION['pdo']->update(); ?>
             <p> Votre login actuel est : <?php
                                             $login = $_SESSION['login'];
                                             echo "<b>" . $login . "</b>"; ?> </p>

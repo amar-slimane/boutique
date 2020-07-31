@@ -1,6 +1,6 @@
 <?php
-include 'bdd.php';
-class userpdo extends bddconnect
+include_once 'bdd.php';
+class userpdo extends bddconnect 
 {
     public $id = "";
     public $login = "";
@@ -34,10 +34,8 @@ class userpdo extends bddconnect
                 ];
                 $request->execute($data);
                 echo "le compte a été créer";
+                header("Refresh:1; url=connexion.php");
             }
-        }
-        if (isset($_SESSION['id'])) {
-            header("location:index.php");
         }
     }
 
@@ -69,13 +67,11 @@ class userpdo extends bddconnect
                     $_SESSION['id'] = $this->id;
                     $_SESSION['login'] = $this->login;
                     $_SESSION['droits'] = $this->droits;
+                    $_SESSION['id'] = $result['id'];
                     echo "Félicitation, vous voilà connecté !";
                     header("Refresh:1; url=index.php");
-                    $_SESSION['id'] = $result['id'];
-                    return true;
                 } else {
                     echo "Le mot de passe n'est pas bon.";
-                    return false;
                 }
             }
         }

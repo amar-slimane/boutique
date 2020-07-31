@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>Connexion</title>
 </head>
 
@@ -12,7 +12,7 @@
     <header>
         <?php include 'include/header.php' ?>
     </header>
-    <main class = "d-flex justify-content-around">
+    <main class="d-flex justify-content-around">
         <div class="formdiv_connexion">
             <form method="post">
                 <div class="form-group">
@@ -27,6 +27,7 @@
                 <button type="submit" class="btn btn-info" name="button_validation">Connexion</button>
             </form>
             <?php
+            // var_dump($_SESSION["object"]);
             $pdo->connect();
             ?>
 
