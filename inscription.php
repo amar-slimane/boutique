@@ -42,7 +42,7 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" name="t_cmdp" required />
                     <small id="emailHelp" class="form-text text-muted">Confirmez votre mot de passe.</small>
                 </div>
-                <button type="submit" class="btn btn-info" name="button_validation">Connexion</button>
+                <button type="submit" class="btn btn-info" name="button_validation">Valider</button>
             </form>
 
         </div>
