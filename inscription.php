@@ -14,7 +14,6 @@
     <header>
         <?php 
         include 'include/header.php';
-        $pdo = new userpdo();
         $pdo->register();
         ?>
     </header>

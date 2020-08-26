@@ -10,6 +10,9 @@ class userpdo extends bddconnect
 
     public function register()
     {
+        if (isset($_SESSION['id'])){
+            header("location:index.php");
+        }
         if (isset($_POST['button_validation'])) {
             $login = htmlspecialchars($_POST['t_login']);
             $password = htmlspecialchars($_POST['t_mdp']);
@@ -53,6 +56,10 @@ class userpdo extends bddconnect
             $request->execute(array($login));
             $result = $request->fetch(PDO::FETCH_ASSOC);
 
+            if (empty($login)) {
+                echo "Veuillez entrer un login.";
+            }
+
             if (empty($password)) {
                 echo "Veuillez entrer un mot de passe.";
             }
@@ -67,7 +74,6 @@ class userpdo extends bddconnect
                     $_SESSION['id'] = $this->id;
                     $_SESSION['login'] = $this->login;
                     $_SESSION['droits'] = $this->droits;
-                    $_SESSION['id'] = $result['id'];
                     echo "Félicitation, vous voilà connecté !";
                     header("Refresh:1; url=index.php");
                 } else {
@@ -87,6 +93,9 @@ class userpdo extends bddconnect
         if (isset($_SESSION['id'])) {
             session_unset();
             session_destroy();
+            header("location:index.php");
+        }
+        else {
             header("location:index.php");
         }
     }
@@ -133,8 +142,6 @@ class userpdo extends bddconnect
                             echo "les mot de passe ne correspondent pas";
                         }
                         if (empty($email)) {
-                            var_dump($this->email);
-                            var_dump("toto");
                             $data = [
                                 'login' => $this->login,
                                 'email' => $this->email
@@ -142,7 +149,6 @@ class userpdo extends bddconnect
                             echo " login modifié en " . $this->login;
                         } else {
                             $this->email = $_POST['email'];
-                            var_dump($this->email);
                             $data = [
                                 'login' => $this->login,
                                 'email' => $this->email

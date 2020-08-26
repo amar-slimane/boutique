@@ -16,10 +16,7 @@
 
         <form method="post">
             <?php
-               if (!isset($_SESSION['pdo'])){
-                $_SESSION['pdo'] = new userpdo;
-            }
-            $_SESSION['pdo']->update(); ?>
+             $pdo->update()?>
             <p> Votre login actuel est : <?php
                                             $login = $_SESSION['login'];
                                             echo "<b>" . $login . "</b>"; ?> </p>

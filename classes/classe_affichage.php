@@ -28,31 +28,34 @@ class affichage extends bddconnect
                     <?php
                     for ($i = 0; $i < count($result); $i++) {
                         if ($_SESSION['droits'] == "admin") {
-                            $select = "<select name=\"droits_user\" id=\"choix-droits\">
-                        <option value=\"droit\"> --" . $result[$i]['droits'] . "--</option>
-                        <option value=\"utilisateur\">utilisateur</option>
-                        <option value=\"modo\">modo</option>
-                        <option value=\"admin\">Admin</option>
-                    </select>";
-                            $button = "<td><input name=\"validation\" type=\"submit\" value=\"Valider\">" . "</td>" .
-                                "<td><input name=\"supp\" type=\"submit\" value=\"Bannir\">" . "</td>" .
-                                "<td><input name=\"ban\" type=\"submit\" value=\"Supprimer\">" . "</td></tr>";
-                        } else if ($_SESSION['droits'] == "modo") {
-                            $select = "Vous ne pouvez modifier les droits";
-                            $button = "</td>" .
-                                "<td><input name=\"supp\" type=\"submit\" value=\"Bannir\">" . "</td>" .
-                                "<td><input name=\"ban\" type=\"submit\" value=\"Supprimer\">" . "</td></tr>";
+                    //         $select = "<select name=\"droits_user\" id=\"choix-droits\">
+                    //     <option value=\"droit\"> --" . $result[$i]['droits'] . "--</option>
+                    //     <option value=\"utilisateur\">utilisateur</option>
+                    //     <option value=\"modo\">modo</option>
+                    //     <option value=\"admin\">Admin</option>
+                    // </select>";
+                             $button = "<td><input name=\"modification\" type=\"submit\" value=\"Modifier\">" . "</td>"
+                            //     "<td><input name=\"supp\" type=\"submit\" value=\"Bannir\">" . "</td>" .
+                            //     "<td><input name=\"ban\" type=\"submit\" value=\"Supprimer\">" . "</td></tr>"
+                            ;
+                        // } else if ($_SESSION['droits'] == "modo") {
+                        //     $select = "Vous ne pouvez modifier les droits";
+                        // //     $button = "</td>" .
+                        // //         "<td><input name=\"supp\" type=\"submit\" value=\"Bannir\">" . "</td>" .
+                        // //         "<td><input name=\"ban\" type=\"submit\" value=\"Supprimer\">" . "</td></tr>";
+                        // // }
                         }
                         echo "<tr><td>" . $result[$i]['id'] . "</td>" .
                             "<td>" . $result[$i]['login'] . "</td>" .
                             "<td>" . $result[$i]['email'] . "</td>" .
-                            "<td>" . $select . "</td>" .
+                            "<td>" . $result[$i]['droits'] . "</td>" .
+                            // "<td>" . $select . "</td>" .
                             $button;
                     }
                     if (isset($_POST['validation'])) {
-                        if ($_POST['droits_user'] == "utilisateur") {
-                            // $value = $_POST['droits_user'];
-                            // echo $value;
+                        if ($_POST['droits_user'] == "utilisateurs") {
+                            $value = $_POST['droits_user'];
+                            echo $value;
                             echo "toto";
                         }
                     }
