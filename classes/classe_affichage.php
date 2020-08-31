@@ -3,6 +3,7 @@ include_once 'classes/bdd.php';
 class affichage extends bddconnect
 {
 
+    public $page_id;
 
     public function __construct()
     {
@@ -27,42 +28,59 @@ class affichage extends bddconnect
                 <form method="post" action="">
                     <?php
                     for ($i = 0; $i < count($result); $i++) {
-                        if ($_SESSION['droits'] == "admin") {
-                    //         $select = "<select name=\"droits_user\" id=\"choix-droits\">
-                    //     <option value=\"droit\"> --" . $result[$i]['droits'] . "--</option>
-                    //     <option value=\"utilisateur\">utilisateur</option>
-                    //     <option value=\"modo\">modo</option>
-                    //     <option value=\"admin\">Admin</option>
-                    // </select>";
-                             $button = "<td><input name=\"modification\" type=\"submit\" value=\"Modifier\">" . "</td>"
-                            //     "<td><input name=\"supp\" type=\"submit\" value=\"Bannir\">" . "</td>" .
-                            //     "<td><input name=\"ban\" type=\"submit\" value=\"Supprimer\">" . "</td></tr>"
-                            ;
-                        // } else if ($_SESSION['droits'] == "modo") {
-                        //     $select = "Vous ne pouvez modifier les droits";
-                        // //     $button = "</td>" .
-                        // //         "<td><input name=\"supp\" type=\"submit\" value=\"Bannir\">" . "</td>" .
-                        // //         "<td><input name=\"ban\" type=\"submit\" value=\"Supprimer\">" . "</td></tr>";
-                        // // }
-                        }
                         echo "<tr><td>" . $result[$i]['id'] . "</td>" .
                             "<td>" . $result[$i]['login'] . "</td>" .
                             "<td>" . $result[$i]['email'] . "</td>" .
-                            "<td>" . $result[$i]['droits'] . "</td>" .
-                            // "<td>" . $select . "</td>" .
-                            $button;
+                            "<td>" . $result[$i]['droits'] . "</td><td>";
+                            ?> <a href="info-reserv.php?id=<?php echo $result[$i]['id'] ?>"><input type="submit" class="btn btn-info" value="Modifier" name="free"></a><?php 
+                            echo "</td>";
                     }
-                    if (isset($_POST['validation'])) {
-                        if ($_POST['droits_user'] == "utilisateurs") {
-                            $value = $_POST['droits_user'];
-                            echo $value;
-                            echo "toto";
-                        }
-                    }
+              
 
                     ?>
             </table>
             </form>
         </div> <?php
+            }
+            public function tableau_item() {
+                $request = $this->_bdd->prepare("SELECT ac.id, ac.nom, ac.description, ac.image, ac.prix, ac.stock FROM article AS ac INNER JOIN categorie_article AS cat_art ON ac.id = cat_art.id_article INNER JOIN sous_categorie_article AS souscat_art ON ac.id = souscat_art.id_article");
+                $request->execute();
+                $result = $request->fetchAll(PDO::FETCH_ASSOC);
+                if (empty($result)) {
+                    echo "il n'y a aucun article disponible";
+                }
+                else {
+                    ?>
+                    <div class=table_user>
+                    <table class="table table-bordered table-sm">
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+                <form method="post" action="" class="formtest">
+                    <?php
+                for ($i = 0; $i < count($result); $i++) {
+                    echo "<tr><td>" . $result[$i]['id'] . "</td>" .
+                        "<td>" . $result[$i]['nom'] . "</td>" .
+                        "<td>" . $result[$i]['prix'] . "</td>" .
+                        "<td>" . $result[$i]['stock'] . "</td><td>";
+                        ?> <a href="info-reserv.php?id=<?php echo $result[$i]['id'] ?>"><input type="submit" class="btn btn-info" value="Modifier" name="free"></a><?php 
+                        echo "</td>";
+                }
+            }
+            ?>
+                </form>
+                </table>
+                    </div>
+             <?php
+            }
+            public function modifier_user($iduser) {
+                
+            }
+            public function modifier_item($iditem) {
+
             }
         }

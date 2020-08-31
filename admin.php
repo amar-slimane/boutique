@@ -18,12 +18,27 @@
         if ($_SESSION['droits'] != "admin" && $_SESSION['droits'] != "modo") {
             header('location:index.php');
         }
-        $affichage->tableau_user();
         ?>
+        <div class="button_suite">
+            <input type="submit" class="button_user" value="Utilisateurs">
+            <input type="submit" value="Objets" class="itembutton">
+        </div>
+
+        <div class="tableau_user hidden ">
+            <?php
+            $affichage->tableau_user();
+            ?>
+        </div>
+
+        <div class="tableau_articles hidden ">
+            <?php $affichage->tableau_item(); ?>
+        </div>
     </main>
     <footer>
     </footer>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src='js/script.js'></script>
 
 </body>
 
-</html> 
+</html>

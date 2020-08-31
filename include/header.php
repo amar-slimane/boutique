@@ -36,8 +36,9 @@ $affichage = new affichage;
       ?>
           <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0 bg-light" type="submit">Recherchez</button>
+      <button class="btn btn-outline-success my-2 my-sm-0 bg-light" type="submit">Rechercher</button>
     </form>
   </div>
+  
 </nav>
 </ul>
