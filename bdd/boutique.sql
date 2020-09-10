@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 24 juil. 2020 à 18:32
+-- Généré le :  mer. 02 sep. 2020 à 13:37
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -50,10 +50,18 @@ CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) NOT NULL,
   `description` text NOT NULL,
+  `image` varchar(255) NOT NULL,
   `prix` varchar(255) DEFAULT NULL,
   `stock` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `article`
+--
+
+INSERT INTO `article` (`id`, `nom`, `description`, `image`, `prix`, `stock`) VALUES
+(1, 'Herbe medicinale', 'Une herbe de soin basique', '', '30', '99');
 
 -- --------------------------------------------------------
 
@@ -79,9 +87,18 @@ CREATE TABLE IF NOT EXISTS `avis` (
 
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_categorie` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `nom_categorie`) VALUES
+(1, 'Consomable'),
+(2, 'Equipement');
 
 -- --------------------------------------------------------
 
@@ -91,10 +108,18 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 
 DROP TABLE IF EXISTS `categorie_article`;
 CREATE TABLE IF NOT EXISTS `categorie_article` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_article` int(11) NOT NULL,
-  `id_categorie` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id_categorie` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `categorie_article`
+--
+
+INSERT INTO `categorie_article` (`id`, `id_article`, `id_categorie`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -105,9 +130,18 @@ CREATE TABLE IF NOT EXISTS `categorie_article` (
 DROP TABLE IF EXISTS `sous_categorie`;
 CREATE TABLE IF NOT EXISTS `sous_categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) NOT NULL,
+  `nom_sous_cat` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `sous_categorie`
+--
+
+INSERT INTO `sous_categorie` (`id`, `nom_sous_cat`) VALUES
+(1, 'soin'),
+(2, 'Offensif'),
+(3, 'Defensif');
 
 -- --------------------------------------------------------
 
@@ -117,10 +151,18 @@ CREATE TABLE IF NOT EXISTS `sous_categorie` (
 
 DROP TABLE IF EXISTS `sous_categorie_article`;
 CREATE TABLE IF NOT EXISTS `sous_categorie_article` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_article` int(11) NOT NULL,
-  `id_sous_categorie` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id_sous_categorie` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `sous_categorie_article`
+--
+
+INSERT INTO `sous_categorie_article` (`id`, `id_article`, `id_sous_categorie`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +178,16 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `email` varchar(255) NOT NULL,
   `droits` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id`, `login`, `password`, `email`, `droits`) VALUES
+(1, 'kiki', '$2y$10$JA2wbMTXXDliBpbEJsBRHu24ZnfBVHBB1IWe.8kDtBObDTOxlvoXu', 'kiki@kiki', 'admin'),
+(2, 'pierre', '$2y$10$JoDSC0U0eMxRVXyds3rBu.O798F6Am8G3cegn3Yf4ozWBoDNrIe3W', 'pierre@pierre', 'utilisateur'),
+(3, 'jeanklode', '$2y$10$Pf/1Sxt4hTUxHg7zKSrlU.rA19Cc.4rPk0enVu6v/eWAMWtnjWxYa', 'jean@klode', 'utilisateur');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

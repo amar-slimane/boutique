@@ -43,10 +43,10 @@ class affichage extends bddconnect
         </div> <?php
             }
             public function tableau_item() {
-                $request = $this->_bdd->prepare("SELECT ac.id, ac.nom, ac.description, ac.image, ac.prix, ac.stock FROM article AS ac INNER JOIN categorie_article AS cat_art ON ac.id = cat_art.id_article INNER JOIN sous_categorie_article AS souscat_art ON ac.id = souscat_art.id_article");
+                $request = $this->_bdd->prepare("SELECT * FROM article JOIN categorie ON article.id_cat = categorie.id JOIN sous_categorie ON article.id_sous_cat = sous_categorie.id");
                 $request->execute();
                 $result = $request->fetchAll(PDO::FETCH_ASSOC);
-                if (empty($result)) {
+                if (!isset($result)) {
                     echo "il n'y a aucun article disponible";
                 }
                 else {
@@ -58,6 +58,8 @@ class affichage extends bddconnect
                     <th>Nom</th>
                     <th>Prix</th>
                     <th>Stock</th>
+                    <th>Catégorie</th>
+                    <th>Sous-catégorie</th>
                     <th>Actions</th>
                 </tr>
                 <form method="post" action="" class="formtest">
@@ -66,7 +68,9 @@ class affichage extends bddconnect
                     echo "<tr><td>" . $result[$i]['id'] . "</td>" .
                         "<td>" . $result[$i]['nom'] . "</td>" .
                         "<td>" . $result[$i]['prix'] . "</td>" .
-                        "<td>" . $result[$i]['stock'] . "</td><td>";
+                        "<td>" . $result[$i]['stock'] . "</td>".
+                        "<td>" . $result[$i]['nom_categorie'] . "</td>".
+                        "<td>" . $result[$i]['nom_sous_cat'] . "</td><td>";
                         ?> <a href="info-reserv.php?id=<?php echo $result[$i]['id'] ?>"><input type="submit" class="btn btn-info" value="Modifier" name="free"></a><?php 
                         echo "</td>";
                 }
@@ -76,6 +80,38 @@ class affichage extends bddconnect
                 </table>
                     </div>
              <?php
+            }
+            public function tableau_categorie(){
+                $request = $this->_bdd->prepare("SELECT id, login, email, droits FROM categorie INNER JOIN");
+                $request->execute();
+                $result = $request->fetchAll(PDO::FETCH_ASSOC);
+                // var_dump($result);
+        ?>
+                <div class=table_user>
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>ID</th>
+                            <th>Login</th>
+                            <th>Email</th>
+                            <th>Droits</th>
+                            <th>Actions</th>
+                        </tr>
+                        <form method="post" action="">
+                            <?php
+                            for ($i = 0; $i < count($result); $i++) {
+                                echo "<tr><td>" . $result[$i]['id'] . "</td>" .
+                                    "<td>" . $result[$i]['login'] . "</td>" .
+                                    "<td>" . $result[$i]['email'] . "</td>" .
+                                    "<td>" . $result[$i]['droits'] . "</td><td>";
+                                    ?> <a href="info-reserv.php?id=<?php echo $result[$i]['id'] ?>"><input type="submit" class="btn btn-info" value="Modifier" name="free"></a><?php 
+                                    echo "</td>";
+                            }
+                      
+        
+                            ?>
+                    </table>
+                    </form>
+                </div> <?php
             }
             public function modifier_user($iduser) {
                 
