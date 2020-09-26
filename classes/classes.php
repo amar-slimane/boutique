@@ -7,6 +7,8 @@ class userpdo extends bddconnect
     public $password = "";
     public $email = "";
     public $droits = "";
+    public $cat_id = "";
+    public $sous_cat_id = "";
 
     public function register()
     {
@@ -164,6 +166,62 @@ class userpdo extends bddconnect
             } else {
                 echo "Veuillez entre votre mot de passe.";
             }
+        }
+    }
+    public function additem() {
+
+        if (isset($_POST['button_validation_item'])){
+            $itemname = $_POST['itm_name'];
+            $itemcat = $_POST['selectpicker_cat'];
+            $itemsouscat = $_POST['selectpicker_sous_cat'];
+            $price = $_POST['price'];
+            $img = $_POST['img_item'];
+           $request = $this->_bdd->prepare("SELECT * FROM article WHERE nom = :nomarticle");
+           $data = [
+            'nomarticle' => $itemname
+           ];
+           $request->execute($data);
+           $result = $request->fetchAll(PDO::FETCH_ASSOC);
+           var_dump($itemcat);
+
+           if (empty($itemname)){
+               echo "Veuillez entrez un nom d'objet.";
+           }
+        
+           if (empty($price)) {
+               echo "veuillez entrer un prix en pièce d'or.";
+           }
+           if (!empty($result)){
+            echo "Cet article existe déjà, et n'a donc pas été ajouté.";
+           }
+           else {
+               
+           }
+        }
+    }
+
+    
+
+    public function select_cat() {
+        $arr_c = [];
+        $request = $this->_bdd->prepare("SELECT * FROM categorie");
+        $request->execute();
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        for ($i = 0; $i < count($result); $i++) {
+            $cat = $result[$i]['nom_categorie']
+            ?> <option> <?=$cat;?></option><?php
+            array_push($arr_c, $cat);
+        }
+    
+    }
+    public function select_sous_cat() {
+        $arr_sc = [];
+        $request = $this->_bdd->prepare("SELECT * FROM sous_categorie");
+        $request->execute();
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        for ($i = 0; $i < count($result); $i++) {
+            ?> <option> <?=$result[$i]['nom_sous_cat'];?></option> 
+            <?php
         }
     }
 }

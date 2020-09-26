@@ -5,6 +5,10 @@ $(function(){
     $('.itembutton').click(function () {
         $('.tableau_articles').toggleClass('hidden, shown');
     });
+    $('.addbutton').click(function () {
+        $('.ajout-item').toggleClass('hidden, shown')
+    });
+    
 });
 // jQuery.ajax({
 //     url: '../classes/class_affichage.php',
